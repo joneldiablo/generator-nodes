@@ -40,7 +40,7 @@ var bowerIgnore = [
 // Since we are writing a new environment file, we remove it from the usemin processing
 var envFile = 'config/environment.js';
 function skipEnv(context, block) {
-	var cfg = {files: []};
+	var cfg = { files: [] };
 
 	var outfile = path.join(context.outDir, block.dest);
 
@@ -48,8 +48,8 @@ function skipEnv(context, block) {
 		dest: outfile,
 		src: []
 	};
-	context.inFiles.forEach(function(f) {
-		if(f !== envFile) {
+	context.inFiles.forEach(function (f) {
+		if (f !== envFile) {
 			files.src.push(path.join(context.inDir, f));
 		}
 	});
@@ -140,7 +140,7 @@ module.exports = function (grunt) {
 						// necessary settings for Angular html5mode.
 
 						return [
-							require('connect-modrewrite') (['!(\\..+)$ /index.html [L]']),
+							require('connect-modrewrite')(['!(\\..+)$ /index.html [L]']),
 							connect.static(appConfig.dist)
 						];
 					}
@@ -156,7 +156,7 @@ module.exports = function (grunt) {
 			options: {
 				map: true,
 				processors: [
-					require('autoprefixer')({browsers: ['last 2 version']})
+					require('autoprefixer')({ browsers: ['last 2 version'] })
 				]
 			},
 			dist: {
@@ -316,7 +316,8 @@ module.exports = function (grunt) {
 								createConfig: skipEnv
 							},
 							'uglifyjs'
-						]
+						],
+						css: ['cssmin']
 					},
 					post: {}
 				}
@@ -493,7 +494,7 @@ module.exports = function (grunt) {
 		]);
 	});
 
-	grunt.registerTask('dist', 'Start a web server from the build folder', function() {
+	grunt.registerTask('dist', 'Start a web server from the build folder', function () {
 		// So far, the only way to keep the BS server running is to have it watch files...
 		grunt.task.run(['bs-connectDist', 'watch']);
 	});
@@ -516,7 +517,7 @@ module.exports = function (grunt) {
 		'filerev',
 		'usemin'
 	]);
-	
+
 	grunt.registerTask('build-staging', [
 		'clean:dist',
 		'wiredep',
@@ -535,7 +536,7 @@ module.exports = function (grunt) {
 		'filerev',
 		'usemin'
 	]);
-	
+
 	grunt.registerTask('build-production', [
 		'clean:dist',
 		'wiredep',
@@ -554,7 +555,7 @@ module.exports = function (grunt) {
 		'filerev',
 		'usemin'
 	]);
-	
+
 	grunt.registerTask('build', [
 		'build-development'
 	]);
